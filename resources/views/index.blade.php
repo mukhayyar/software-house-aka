@@ -1,18 +1,12 @@
 <x-app-layout>
     <div class="flex justify-center items-center w-full h-[calc(100vh-64px)]">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            {{-- <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <h1>Home Page</h1>
-                </div>
-            </div> --}}
-
             <div class="w-full h-full grid md:grid-cols-2">
                 <div class="w-full flex flex-col justify-center">
                     <h1 class="text-7xl font-bold">Find the right <span class="text-blue-600">digital</span> service,
                         right away</h1>
 
-                    <form class="w-full mx-auto mt-10">
+                    <form class="w-full mx-auto mt-10" method="GET" action="/services">
                         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -22,7 +16,7 @@
                                         stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                 </svg>
                             </div>
-                            <input type="search" id="default-search"
+                            <input type="search" id="default-search" name="search"
                                 class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                                 placeholder="Search for any service..." required />
                             <button type="submit"
@@ -44,8 +38,6 @@
                     <img src="{{ asset('images/image1.svg') }}" alt="Hero Image" class="w-[500px]">
                 </div>
             </div>
-
-
         </div>
     </div>
 </x-app-layout>
