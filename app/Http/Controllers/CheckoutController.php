@@ -23,10 +23,10 @@ class CheckoutController extends Controller
             'payment_confirmation' => ['required', 'image', 'max:2048'], // max 2MB
             'order_note' => ['required', 'string', 'max:1000'],
         ]);
-
+        $filename = null;
         // Store the payment confirmation image
-        if ($request->hasFile('image')) {
-            $file = request('image');
+        if ($request->hasFile('payment_confirmation')) {
+            $file = request('payment_confirmation');
             $filename = $file->getClientOriginalName();
 
             $file->storeAs('payments/'. Auth::id(), $filename, 's3');
@@ -50,6 +50,6 @@ class CheckoutController extends Controller
             'confirmation_image_url' => $filename,
         ]);
 
-        return redirect()->route('orders.show', $order->id)->with('success', 'Payment submitted successfully!');
+        return redirect()->route('myorders')->with('success', 'Payment submitted successfully!');
     }
 }

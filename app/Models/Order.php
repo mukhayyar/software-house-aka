@@ -18,5 +18,19 @@ class Order extends Model
         'status',
         'completion_date',
     ];
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
+
+    public function buyer(){
+        return $this->belongsTo(User::class, 'buyer_id');
+    }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 }
 

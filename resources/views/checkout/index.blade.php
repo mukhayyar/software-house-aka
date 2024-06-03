@@ -10,37 +10,48 @@
     <div class="py-12 px-4 bg-gray-100">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <h1 class="text-3xl font-semibold">Metode Pembayaran</h1>
-            <form id="payment-form" method="POST" action="{{ route('payment.store',1) }}" enctype="multipart/form-data">
+            <form id="payment-form" method="POST" action="{{ route('payment.store',$service->id) }}" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="service_id" value="{{ $service->id }}">
+                <input type="hidden" name="amount" value="{{ $service->price }}">
                 <input type="hidden" name="payment_method" id="payment-method">
                 <div class="w-full">
                     <div class="md:flex gap-5 mt-6">
                         <div class="w-full max-w-[400px]">
                             <div class="flex flex-col gap-6 cursor-pointer">
                                 <label for="bca-radio"
-                                    class="payment-option flex items-center justify-between border-2 px-5 py-4 w-[400px] h-[64px] overflow-hidden bg-white">
-                                    <div class="flex items-center gap-2">
-                                        <input type="radio" id="bca-radio" name="payment_option" value="BCA" class="hidden">
-                                        <div class="dot h-4 w-4 rounded-full border-2 border-blue-500"></div>
-                                        <h1 class="font-semibold text-lg">BCA</h1>
+                                    class="payment-option flex items-center justify-between border-2 px-5 py-4 w-[400px] h-[100px] overflow-hidden bg-white">
+                                    <div class="flex flex-col gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <input type="radio" id="bca-radio" name="payment_option" value="BCA" class="hidden">
+                                            <div class="dot h-4 w-4 rounded-full border-2 border-blue-500"></div>
+                                            <h1 class="font-semibold text-lg">BCA</h1>
+                                        </div>
+                                        <p class="text-sm text-gray-600">Account Number: 1234567890</p>
                                     </div>
                                     <div><img src="{{ asset('images/bca.svg') }}" alt="" class="w-16"></div>
                                 </label>
                                 <label for="mandiri-radio"
-                                    class="payment-option flex items-center justify-between border-2 px-5 py-4 w-[400px] h-[64px] overflow-hidden bg-white">
-                                    <div class="flex items-center gap-2">
-                                        <input type="radio" id="mandiri-radio" name="payment_option" value="MANDIRI" class="hidden">
-                                        <div class="dot h-4 w-4 rounded-full border-2 border-blue-500"></div>
-                                        <h1 class="font-semibold text-lg">MANDIRI</h1>
+                                    class="payment-option flex items-center justify-between border-2 px-5 py-4 w-[400px] h-[100px] overflow-hidden bg-white">
+                                    <div class="flex flex-col gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <input type="radio" id="mandiri-radio" name="payment_option" value="MANDIRI" class="hidden">
+                                            <div class="dot h-4 w-4 rounded-full border-2 border-blue-500"></div>
+                                            <h1 class="font-semibold text-lg">MANDIRI</h1>
+                                        </div>
+                                        <p class="text-sm text-gray-600">Account Number: 0987654321</p>
                                     </div>
                                     <div><img src="{{ asset('images/mandiri.svg') }}" alt="" class="w-16"></div>
                                 </label>
                                 <label for="bni-radio"
-                                    class="payment-option flex items-center justify-between border-2 px-5 py-4 w-[400px] h-[64px] overflow-hidden bg-white">
-                                    <div class="flex items-center gap-2">
-                                        <input type="radio" id="bni-radio" name="payment_option" value="BNI" class="hidden">
-                                        <div class="dot h-4 w-4 rounded-full border-2 border-blue-500"></div>
-                                        <h1 class="font-semibold text-lg">BNI</h1>
+                                    class="payment-option flex items-center justify-between border-2 px-5 py-4 w-[400px] h-[100px] overflow-hidden bg-white">
+                                    <div class="flex flex-col gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <input type="radio" id="bni-radio" name="payment_option" value="BNI" class="hidden">
+                                            <div class="dot h-4 w-4 rounded-full border-2 border-blue-500"></div>
+                                            <h1 class="font-semibold text-lg">BNI</h1>
+                                        </div>
+                                        <p class="text-sm text-gray-600">Account Number: 1122334455</p>
                                     </div>
                                     <div><img src="{{ asset('images/bni.svg') }}" alt="" class="w-16"></div>
                                 </label>
@@ -86,11 +97,11 @@
                                     <button class="bg-blue-600 hover:bg-blue-700 w-full text-white px-5 py-4 rounded">Submit Payment</button>
                                     <div class="flex items-center gap-3 mt-4">
                                         <i class="fa-solid fa-clock-rotate-left text-green-600"></i>
-                                        <p class="text-sm">Jaminan 30 Hari Uang Kembali</p>
+                                        <p class="text-sm">30 Day Money Back Guarantee</p>
                                     </div>
                                     <div class="flex items-center gap-3 mt-4">
                                         <i class="fa-solid fa-lock text-green-600"></i>
-                                        <p class="text-sm">Pembayaran Aman dan Terenkripsi</p>
+                                        <p class="text-sm">Secure and Encrypted Payments</p>
                                     </div>
                                     {{-- <p class="mt-4 text-sm">Dengan checkout, Anda setuju dengan <a href="#" class="font-bold text-blue-600 hover:underline">Ketentuan Penggunaan</a> kami dan mengonfirmasi bahwa Anda telah membaca <a href="#" class="font-bold text-blue-600 hover:underline">Kebijakan Privasi</a> kami. Anda dapat membatalkan biaya perpanjangan layanan kapan saja.</p> --}}
                                 </div>

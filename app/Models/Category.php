@@ -12,4 +12,8 @@ class Category extends Model
     protected $table = 'service_categories';
 
     public $timestamps = false;
+
+    public function user() {
+        return $this->hasOne(User::class);
+    }
 }

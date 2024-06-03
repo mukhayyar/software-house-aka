@@ -31,4 +31,13 @@ class Service extends Model
     public function thumbnail() {
         return $this->thumbnail ? "https://buildforyou.s3.ap-southeast-1.amazonaws.com/"."thumbnail/".Auth::id()."/".$this->thumbnail : "https://buildforyou.s3.ap-southeast-1.amazonaws.com/default_service.jpg";
     }
+
+    public function category() {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
 }

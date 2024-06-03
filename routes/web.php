@@ -38,12 +38,11 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/checkout/{id}', [CheckoutController::class, 'index'])->name('checkout');
-    Route::get('/checkout/{id}/process', [CheckoutController::class, 'store'])->name('payment.store');
+    Route::post('/checkout/{id}/process', [CheckoutController::class, 'store'])->name('payment.store');
     Route::get('/myorders', [MyorderController::class, 'index'])->name('myorders');
-    Route::get('/myorders/onprocess', fn() => view('myOrder.process'))->name('myorders.onprocess');
-    Route::get('/myorders/notpaid', function () {
-        return view('myOrder.notpaid');
-    })->name('myorders.notpaid');
+    Route::get('/myorders/onprocess', [MyorderController::class, 'projectProgress'])->name('myorders.project.progress');
+    Route::get('/myorders/payment-verification', [MyorderController::class, 'projectPayment'])->name('myorders.project.payment');
+    Route::get('/myorders/payment-verification/{id}', [MyorderController::class, 'paymentDetails'])->name('myorders.details');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

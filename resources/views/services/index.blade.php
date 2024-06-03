@@ -71,33 +71,43 @@
 
                 <div class="my-10 grid md:grid-cols-4 gap-8">
                     {{-- Card --}}
-                    @foreach($services as $service)
-                    <a href="{{ route('services.details',$service->id) }}">
-                        <div
-                            class="shadow-md w-full flex flex-col overflow-hidden rounded-lg text-slate-600 cursor-pointer hover:scale-105 transition-all duration-200">
-                            <div class="relative w-full h-[210px] overflow-hidden">
-                                <img src="{{$service->thumbnail()}}"
-                                    alt="" class="w-full h-full object-cover object-center">
-                            </div>
-                            <div class="p-4 flex flex-col gap-2">
-                                <div class="flex items-center gap-2">
-                                    <img src="{{$service->user->avatar()}}"
-                                        alt="" class="w-8 h-8 rounded-full">
-                                    <h1 class="font-semibold">{{$service->user->name}}</h1>
-                                </div>
-                                <p>{{$service->description}}</p>
-                                <div class="text-black flex items-center gap-2">
-                                    <i class="fa-solid fa-star text-xl"></i>
-                                    <p class="font-bold text-xl">4.5 </p>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <p class="font-semibold">Mulai Dari:</p>
-                                    <p>{{"Rp.".number_format($service->price, 2, ',', '.')}}</p>
-                                </div>
-                            </div>
+                    @if($services->isEmpty())
+                        <div class="text-center text-gray-500">
+                            <h2 class="text-2xl font-semibold">Sorry, there are no services available for the selected category or price range.</h2>
                         </div>
-                    </a>
-                    @endforeach
+                    @else
+                        @foreach($services as $service)
+                            <a href="{{ route('services.details',$service->id) }}">
+                                <div
+                                    class="shadow-md w-full flex flex-col overflow-hidden rounded-lg text-slate-600 cursor-pointer hover:scale-105 transition-all duration-200">
+                                    <div class="relative w-full h-[210px] overflow-hidden">
+                                        <img src="{{$service->thumbnail()}}"
+                                            alt="" class="w-full h-full object-cover object-center">
+                                    </div>
+                                    <div class="p-4 flex flex-col gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <img src="{{$service->user->avatar()}}"
+                                                alt="" class="w-8 h-8 rounded-full">
+                                            <h1 class="font-semibold">{{$service->user->name}}</h1>
+                                        </div>
+                                        <p>{{$service->description}}</p>
+                                        <div class="text-black flex items-center gap-2">
+                                            <i class="fa-solid fa-star text-xl"></i>
+                                            <p class="font-bold text-xl">4.5 </p>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <p class="font-semibold">Mulai Dari:</p>
+                                            <p>{{"Rp.".number_format($service->price, 2, ',', '.')}}</p>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <p class="font-semibold">{{$service->category->name}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    @endif
+
                 </div>
             </div>
         </div>
