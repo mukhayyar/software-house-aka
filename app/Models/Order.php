@@ -32,5 +32,10 @@ class Order extends Model
     {
         return $this->belongsTo(Service::class);
     }
+    
+    public function milestones()
+    {
+        return $this->hasMany(ProjectTracking::class);
+    }
 }
 

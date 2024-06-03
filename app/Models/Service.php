@@ -29,7 +29,7 @@ class Service extends Model
     }
 
     public function thumbnail() {
-        return $this->thumbnail ? "https://buildforyou.s3.ap-southeast-1.amazonaws.com/"."thumbnail/".Auth::id()."/".$this->thumbnail : "https://buildforyou.s3.ap-southeast-1.amazonaws.com/default_service.jpg";
+        return $this->thumbnail ? "https://buildforyou.s3.ap-southeast-1.amazonaws.com/"."thumbnail/".$this->user->id."/".$this->thumbnail : "https://buildforyou.s3.ap-southeast-1.amazonaws.com/default_service.jpg";
     }
 
     public function category() {

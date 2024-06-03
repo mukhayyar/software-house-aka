@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\ProjectTracking;
-use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
@@ -23,15 +22,13 @@ class OrderController extends Controller
         $request->validate([
             'order_id' => 'required|exists:orders,id',
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'due_date' => 'required|date',
+            'description' => 'required|string'
         ]);
 
         ProjectTracking::create([
             'order_id' => $request->order_id,
             'title' => $request->title,
             'description' => $request->description,
-            'due_date' => $request->due_date,
         ]);
 
         return redirect()->back()->with('status', 'Milestone added successfully.');

@@ -5,9 +5,11 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\GigController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyorderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceIncludedController;
 use App\Http\Controllers\Auth\PhotoProfileController;
 
@@ -54,6 +56,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/gigs', [GigController::class, 'store'])->name('gigs.store');
     Route::resource('faqs', FaqController::class)->only(['store', 'destroy']);
     Route::resource('services-included', ServiceIncludedController::class)->only(['store', 'destroy']);
+    Route::patch('/payments/{payment}/verify', [PaymentController::class, 'verify'])->name('payments.verify');
+    Route::patch('/payments/{payment}/reject', [PaymentController::class, 'reject'])->name('payments.reject');
+    Route::delete('/payments/{payment}', [PaymentController::class, 'destroy'])->name('payments.destroy');
+    Route::patch('/orders/{order}/changeToProgress', [OrderController::class, 'changeToProgress'])->name('orders.changeToProgress');
+    Route::post('/milestones/store', [OrderController::class, 'storeMilestone'])->name('milestones.store');
+
 });
 
 

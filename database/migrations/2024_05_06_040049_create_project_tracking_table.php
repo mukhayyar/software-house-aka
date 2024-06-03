@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('project_tracking', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained('orders');
-            $table->text('milestone_description');
-            $table->enum('status', ['not started', 'in progress', 'completed']);
+            $table->text('title');
+            $table->text('description');
             $table->timestamps();
         });
     }

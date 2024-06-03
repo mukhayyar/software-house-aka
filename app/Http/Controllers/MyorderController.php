@@ -11,10 +11,12 @@ class MyorderController extends Controller
     public function index()
     {
         if(Auth::user()->user_type == 'buyer') {
-            $totalPendingOrders = Order::where('buyer_id',Auth::id())->whereHas('payment', function($query) {
+            $totalPendingOrders = Order::whereHas('payment', function($query) {
                 $query->where('payment_status', 'pending');
-            })->count();
-            $totalOnProgressOrders = Order::where('buyer_id', Auth::id())->orWhere('status', 'in progress')->count();
+            })->where([
+                ['buyer_id',Auth::id()],
+                ['status', 'pending']])->count();
+            $totalOnProgressOrders = Order::where([['buyer_id', Auth::id()],['status', 'in progress']])->count();
         } else {
             // seller
             $totalPendingOrders = Order::whereHas('service', function($query) {
@@ -27,7 +29,7 @@ class MyorderController extends Controller
             whereHas('payment', function($query) {
                 $query->where('payment_status', 'verified');
             })->
-            where('status', 'pending')->orWhere('status', 'in progress')->count();
+            where([['status', 'pending'],['status', 'in progress']])->count();
         }
         return view('myOrder.index', compact('totalPendingOrders', 'totalOnProgressOrders'));
     }
@@ -45,16 +47,21 @@ class MyorderController extends Controller
 
     public function projectProgress() {
         if(Auth::user()->user_type == 'buyer') {
-            $OnProgressOrders = Order::with('service')->where('buyer_id',Auth::id())->orWhere('status', 'in progress')->get();
+            $OnProgressOrders = Order::with('service')->where([
+                ['buyer_id',Auth::id()],
+                ['status', 'in progress']])->get();
         } else {
             $OnProgressOrders = Order::with('service')->whereHas('service', function($query) {
                 $query->where('seller_id', Auth::id());
             })->
             whereHas('payment', function($query) {
                 $query->where('payment_status', 'verified');
-            })->where('status', 'pending')->orWhere('status', 'in progress')->get();
+            })->where(function($query) {
+                $query->where('status', 'pending')
+                      ->orWhere('status', 'in progress');
+            })->get();
         }
-        return view('myOrder.process', compact('OnProgressOrders'));
+        return view('myOrder.project_process', compact('OnProgressOrders'));
     }
 
     public function paymentDetails($id) {

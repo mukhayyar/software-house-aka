@@ -13,8 +13,8 @@ class ServiceController extends Controller
         $query = Service::with('user');
 
         if ($request->filled('search')) {
-            $query->where('title', 'like', '%' . $request->search . '%')
-                ->orWhere('description', 'like', '%' . $request->search . '%');
+            $query->where([['title', 'like', '%' . $request->search . '%'],
+            ['description', 'like', '%' . $request->search . '%']]);
         }
 
         if ($request->filled('category')) {
