@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/payments/{payment}', [PaymentController::class, 'destroy'])->name('payments.destroy');
     Route::patch('/orders/{order}/changeToProgress', [OrderController::class, 'changeToProgress'])->name('orders.changeToProgress');
     Route::post('/milestones/store', [OrderController::class, 'storeMilestone'])->name('milestones.store');
-
+    Route::patch('/orders/{order}/complete', [OrderController::class, 'complete'])->name('orders.complete');
 });
 
 

@@ -33,4 +33,14 @@ class OrderController extends Controller
 
         return redirect()->back()->with('status', 'Milestone added successfully.');
     }
+
+    public function complete($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->status = 'completed';
+        $order->completion_date = now();
+        $order->save();
+
+        return redirect()->back()->with('success', 'The project has been marked as completed.');
+    }
 }

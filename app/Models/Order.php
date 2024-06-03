@@ -37,5 +37,9 @@ class Order extends Model
     {
         return $this->hasMany(ProjectTracking::class);
     }
+
+    public function review() {
+        return $this->hasMany(Review::class);
+    }
 }
 

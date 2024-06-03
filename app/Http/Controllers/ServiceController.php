@@ -26,7 +26,7 @@ class ServiceController extends Controller
             $query->where('price', '<=', $price);
         }
 
-        $services = $query->paginate(6);
+        $services = $query->paginate(8);
         $categories = Category::all(); // Assuming Category model is used
 
         return view('services.index', compact('services', 'categories'));

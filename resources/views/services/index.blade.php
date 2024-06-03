@@ -109,6 +109,9 @@
                     @endif
 
                 </div>
+                <div class="mt-6">
+                    {{ $services->links() }}
+                </div>
             </div>
         </div>
     </div>

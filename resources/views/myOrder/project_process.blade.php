@@ -54,6 +54,14 @@
                             <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded" onclick="openModal('addMilestoneModal{{$order->id}}')">
                                 Add Milestone
                             </button>
+
+                            <form method="POST" action="{{ route('orders.complete', $order->id) }}">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="bg-green-500 text-white px-4 py-2 mt-2 rounded">
+                                    Complete Project
+                                </button>
+                            </form>
                         </div>
                         @endif
                     @endif

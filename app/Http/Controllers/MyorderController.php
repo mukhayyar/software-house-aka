@@ -28,8 +28,10 @@ class MyorderController extends Controller
             $totalOnProgressOrders = Order::
             whereHas('payment', function($query) {
                 $query->where('payment_status', 'verified');
-            })->
-            where([['status', 'pending'],['status', 'in progress']])->count();
+            })->where(function($query) {
+                $query->where('status', 'pending')
+                      ->orWhere('status', 'in progress');
+            })->count();
         }
         return view('myOrder.index', compact('totalPendingOrders', 'totalOnProgressOrders'));
     }
